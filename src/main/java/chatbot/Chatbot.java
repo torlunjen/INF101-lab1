@@ -56,7 +56,7 @@ public class Chatbot {
 	 * @return a welcome message
 	 */
 	public String welcome() {
-		return null;
+		return "Hei";
 	}
 
 }

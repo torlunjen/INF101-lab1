@@ -9,7 +9,7 @@ class ChatBotTest{
 	@Test 
 	void testWelcomeNotEmpty() {
 		String welcome = new Chatbot("stopp").welcome();
-		assertFalse(welcome == null);
+		assertNotNull(welcome);
 		assertTrue(welcome.length() > 2);
 	}
 

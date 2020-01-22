@@ -27,13 +27,30 @@ public class CeasarCipher {
 		System.out.println("Dette programmet kan kryptere og dekryptere strenger ved hjelp av CaesarCipher.");
 		System.out.println("Skriv \"encrypt\" dersom du vil kryptere en streng og \"decrypt\" dersom du vil de-kryptere en streng.");
 		String xCrypt = scanner.nextLine();
-		//TODO sjekk om bruker skrev encrypt eller decrypt
-		
-		//TODO les inn streng og steg fra terminalen
-		
-		//TODO skriv ut kryptert eller dekryptert streng
-		
-		scanner.close();
+		if(xCrypt.equals("encrypt")) {
+			System.out.print("Skriv inn en streng du vil kryptere: ");
+			String encrypt = scanner.nextLine();
+			System.out.print("Skriv inn antall steg krypteringen skal bruke: ");
+			String sNum = scanner.nextLine();
+			int steps = Integer.parseInt(sNum);
+			System.out.println(encrypt(encrypt, steps));
+		}
+		else if(xCrypt.equals("decrypt")) {
+			System.out.print("Skriv inn en streng du vil dekryptere: ");
+			String decrypt = scanner.nextLine();
+			System.out.print("Skriv inn antall steg dekrypteringen skal bruke: ");
+			String sNum = scanner.nextLine();
+			int steps = Integer.parseInt(sNum);
+			System.out.println(decrypt(decrypt, steps));
+		}
+		else {
+			System.out.print("Din input gav ikke mening, vil du prøve igjen? ");
+			String yesNo = scanner.nextLine();
+			if(yesNo.equalsIgnoreCase("Y")) {
+				main(null);
+			}
+			scanner.close();
+		}
 	}
 
 	/**
@@ -44,7 +61,7 @@ public class CeasarCipher {
 	 * either capital or lower case letter
 	 * 
 	 * @param steps - number of steps to shift characters
-	 * @return 
+	 * @return char - shifted the given steps
 	 * 
 	 */
 	public static char shiftCharacter(char c, int steps){
@@ -57,17 +74,27 @@ public class CeasarCipher {
 	/**
 	 * @param index - index in the alphabet (0-25)
 	 * @param steps - number of steps to right-shift (positive or negative)
-	 * @return an index in the alphabet (0-25) such that it is {@link steps} away from the original {@link index} 
+	 * @return an index in the alphabet (0-25) such that it is steps away from the original index.
 	 */
 	private static int nextIndex(int index, int steps) {
-		int ascii = 'a';
-		int nextStep = ((index - ascii) + steps) % 26;
-
-		if(nextStep < 0) {
-			int finalStep = nextStep + 26;
-			return finalStep + ascii;
+		int asciiLower = 'a';
+		int asciiUpper = 'A';
+		int finalStep;
+		if(index >= 65 && index <= 90) {
+			int nextStepUpper = ((index - asciiUpper) + steps) % num_chars;
+			if(nextStepUpper < 0) {
+				finalStep = nextStepUpper + num_chars + asciiUpper;
+			}
+			else finalStep = nextStepUpper + asciiUpper;
 		}
-		return nextStep + ascii;
+		else {
+			int nextStepLower = ((index - asciiLower) + steps) % num_chars;
+			if(nextStepLower < 0) {
+				finalStep = nextStepLower + num_chars + asciiLower;
+			}
+			else finalStep = nextStepLower + asciiLower;
+		}
+		return finalStep;
 	}
 	
 	/**
@@ -78,8 +105,14 @@ public class CeasarCipher {
 	public static String encrypt(String s, int steps) {
 		StringBuilder ns = new StringBuilder();
 		for (int i = 0; i < s.length(); i++) {
-			char nc = shiftCharacter(s.charAt(i), steps);
-			ns.append(nc);
+			if(s.charAt(i) == ' ') {
+				ns.append(s.charAt(i));
+			}
+			else {
+				char nc = shiftCharacter(s.charAt(i), steps);
+				ns.append(nc);
+			}
+
 		}
 		return ns.toString();
 	}

@@ -51,8 +51,7 @@ public class CeasarCipher {
 		if(steps == 0) {
 			return c;
 		}
-		else
-			return (char)(nextIndex(c, steps));
+		return (char)(nextIndex(c, steps));
 	}
 	
 	/**
@@ -68,8 +67,7 @@ public class CeasarCipher {
 			int finalStep = nextStep + 26;
 			return finalStep + ascii;
 		}
-		else
-			return nextStep + ascii;
+		return nextStep + ascii;
 	}
 	
 	/**

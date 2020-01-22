@@ -44,13 +44,19 @@ public class CeasarCipher {
 			System.out.println(decrypt(decrypt, steps));
 		}
 		else {
-			System.out.print("Din input gav ikke mening, vil du prøve igjen? ");
+			System.out.print("Din input gav ikke mening, vil du prøve igjen? (Y/N) ");
 			String yesNo = scanner.nextLine();
 			if(yesNo.equalsIgnoreCase("Y")) {
 				main(null);
 			}
-			scanner.close();
+
 		}
+		System.out.print("Vil du kryptere eller dekryptere mer? (Y/N) ");
+		String more = scanner.nextLine();
+		if(more.equalsIgnoreCase("Y")) {
+			main(null);
+		}
+		scanner.close();
 	}
 
 	/**

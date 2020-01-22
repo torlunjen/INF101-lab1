@@ -49,6 +49,7 @@ public class CeasarCipher {
 			if(yesNo.equalsIgnoreCase("Y")) {
 				main(null);
 			}
+			else System.exit(0);
 
 		}
 		System.out.print("Vil du kryptere eller dekryptere mer? (Y/N) ");
@@ -56,6 +57,7 @@ public class CeasarCipher {
 		if(more.equalsIgnoreCase("Y")) {
 			main(null);
 		}
+		else System.exit(0);
 		scanner.close();
 	}
 
@@ -118,7 +120,6 @@ public class CeasarCipher {
 				char nc = shiftCharacter(s.charAt(i), steps);
 				ns.append(nc);
 			}
-
 		}
 		return ns.toString();
 	}
@@ -130,7 +131,6 @@ public class CeasarCipher {
 	 */
 	public static String decrypt(String s, int steps){
 		return encrypt(s, - steps);
-
 	}
 
 }

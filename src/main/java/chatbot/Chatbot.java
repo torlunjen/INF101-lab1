@@ -1,5 +1,7 @@
 package chatbot;
 
+import java.util.Random;
+
 /**
  * Denne klassen implementerer en chatbot.
  * Boten kan si enkle ting som 'Hei' og 'Hva heter du?' 
@@ -12,7 +14,9 @@ public class Chatbot {
 		{
 			"Bot: Hello, I am a bot.",
 			"Bot: Hei!",
-			"Bot: Hva heter du?"
+			"Bot: Hva heter du?",
+			"Bot: Hva kan jeg gjøre for deg i dag?",
+			"Bot: Fint vær i dag?"
 		};
 	
 	/**
@@ -21,6 +25,7 @@ public class Chatbot {
 	private CharSequence stopCondition;
 
 	public Chatbot(String stopCondition) {
+		this.stopCondition = stopCondition;
 	}
 
 	/**
@@ -29,11 +34,13 @@ public class Chatbot {
 	 * @return a response string
 	 */
 	public String getResponse(String input) {
+		Random rand = new Random();
+		int randomResponse = rand.nextInt(RESPONSES.length);
 		if(input.toLowerCase().contains("hei")) {
 			return RESPONSES[1];
 		}
 		else {
-			return RESPONSES[0];
+			return RESPONSES[randomResponse];
 		}
 	
 	}
@@ -47,7 +54,7 @@ public class Chatbot {
 	 * @return true if the string contains the stop condition term, false otherwise 
 	 */
 	boolean checkDone(String input) {
-		return false;
+		return input.equalsIgnoreCase((String) this.stopCondition);
 	}
 
 	/**
@@ -56,7 +63,7 @@ public class Chatbot {
 	 * @return a welcome message
 	 */
 	public String welcome() {
-		return "Hei";
+		return "Hei jeg er en chatbot";
 	}
 
 }
